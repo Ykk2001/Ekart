@@ -7,7 +7,7 @@ export async function isAuthenticated(req,res,next)
 {
   try{
    const authHeader=req.headers.authorization;
-   if(!authHeader ||!authHeader.startsWith('Bearer '))
+   if(!authHeader ||!authHeader.startsWith('Bearer'))
    {
     return res.status(400).json({success:false,message:"Missing Token Or Invalid Token"})
    }
@@ -52,7 +52,7 @@ export async function isAdmin(req,res,next)
   next()
  }
  else{
-  return res.status(400).json({success:false,message:"access denied:admin can access only"})
+  return res.status(403).json({success:false,message:"access denied:admin can access only"})
  }
 }//this api request can access only by admin user(role==admin )
 

@@ -1,7 +1,8 @@
 import { config } from 'dotenv';//loads .env file content inside process.env
 config();
 import express from 'express';
-import router from './routes/userRoutes.js';
+import userRoute from './routes/userRoutes.js';
+import productRoute from './routes/productRoute.js'
 import  {connectDB } from './database/db.js';
 import cors from 'cors'
 
@@ -18,7 +19,8 @@ app.get('/',(req,res)=>{
    res.send("Server is Running...");
 })
 
-app.use('/api/v1/user',router);//base api url for the userController
+app.use('/api/v1/user',userRoute);//base api url for the userController
+app.use('/api/v1/product',productRoute)//base api url for the ProductController
 
  connectDB();  
 
@@ -27,7 +29,7 @@ app.listen(PORT,()=>{
   console.log(`server is listening on port: ${PORT}`);
 })    // when server will get run port will get registered
 
-//NOTES-----> 2nd Vedio is going on -->completed till 50:00 m () update user is going on
+//NOTES-----> 2nd Vedio is going on -->completed till 2:37 hr () Products.jsx in frontend
 
 //Flow of the project in backend-->1) server creation through express --->2)mongodb connected through mongoose--->3)
 

@@ -6,7 +6,7 @@ const storage=multer.memoryStorage();//Stores uploaded files in RAM (memory) ins
 export const singleUpload=multer({storage:storage}).single('file')
 
 //multiple upload upto 5 images
-export const multipleUpload=multer({storage}).array('files',5);//<input type="file" name="files" multiple />
+export const multipleUpload=multer({storage}).any();//<input type="file" name="files" multiple />
 
 
 
