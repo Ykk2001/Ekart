@@ -1,18 +1,10 @@
-// {
-//   "compilerOptions": {
-//     "baseUrl": ".",
-//     "paths": {
-//         "@/*":["./src/*"]
-//     }
-//   }  
-// }  --->code while geting error
-
 {
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "ignoreDeprecations": "6.0"
   },
   "include": ["src"]
-}///---->code after fixing the error
+}

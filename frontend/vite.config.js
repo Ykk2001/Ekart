@@ -12,11 +12,9 @@
 //   }
 // })  ---------> first code 
 
-
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
+
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -24,10 +22,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react()],
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-});//-------->second code after error (failed to load the component  while importing the component and function beacuse of type module in package.json )
+});;//-------->second code after error (failed to load the component  while importing the component and function beacuse of type module in package.json )
