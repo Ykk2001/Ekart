@@ -29,9 +29,11 @@ app.listen(PORT,()=>{
   console.log(`server is listening on port: ${PORT}`);
 })    // when server will get run port will get registered
 
-//NOTES-----> 2nd Vedio is going on -->completed till 2:37 hr () Products.jsx in frontend
+//NOTES-----> 2nd Vedio is going on -->completed till 2:54 hr () Products.jsx in frontend
 
 //Flow of the project in backend-->1) server creation through express --->2)mongodb connected through mongoose--->3)
 
 //password for ykhatake6@gmail.com -->Yogesh@456
+
+
 

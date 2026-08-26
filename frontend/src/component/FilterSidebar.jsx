@@ -12,7 +12,7 @@ import {
   MenuItem,
 } from "@mui/material";
 
-const FilterSidebar = ({ allProducts,priceRange }) => {
+const FilterSidebar = ({ allProducts,priceRange,setPriceRange,search,setSearch,category,setCategory,brand,setBrand }) => {
   const Categories = allProducts.map((p) => p.category); // get all product categories here
   const UniqueCategory = ["All", ...new Set(Categories)];
 
@@ -20,6 +20,43 @@ const FilterSidebar = ({ allProducts,priceRange }) => {
   const uniqueBrand = ["All", ...new Set(Brands)];
 
   console.log(uniqueBrand);
+
+  function handleCategoryClick(val)
+  {
+    setCategory(val);
+  }
+
+  function handleBrandChange(e)
+  {
+    setBrand(e.target.value);
+  }
+
+  function handleMinChange(e)
+  {
+    const value=Number(e.target.value);
+    if(value<=priceRange[1])
+    {
+      // setPriceRange([priceRange[0],value])
+       setPriceRange([value, priceRange[1]])
+    }
+  }//
+
+  function handleMaxChange(e)
+  {
+   const value=Number(e.target.value);
+    if(value>=priceRange[0])
+    {
+      setPriceRange([priceRange[0],value])
+    }
+  }
+
+  function resetFilters()
+  {
+    setSearch('');
+    setCategory("All");
+    setBrand('All');
+    setPriceRange([0,999999])
+  }
 
   return (
     <Box
@@ -40,6 +77,8 @@ const FilterSidebar = ({ allProducts,priceRange }) => {
       <TextField
         type="text"
         placeholder="Search..."
+        value={search}
+        onChange={(e)=>setSearch(e.target.value)}
         fullWidth
         size="small"
         sx={{
@@ -69,6 +108,8 @@ const FilterSidebar = ({ allProducts,priceRange }) => {
               value={item}
               control={<Radio />}
               label={item}
+              checked={category===item}
+              onChange={()=>handleCategoryClick(item)}
               sx={{
                 gap: 0.5,
                 margin: 0,
@@ -97,6 +138,8 @@ const FilterSidebar = ({ allProducts,priceRange }) => {
           backgroundColor: "white",
           borderRadius: 1,
         }}
+        value={brand}
+        onChange={handleBrandChange}
       >
         {uniqueBrand.map((item, index) => (
           <MenuItem key={index} value={item}>
@@ -145,6 +188,8 @@ const FilterSidebar = ({ allProducts,priceRange }) => {
               width: 80,
               backgroundColor: "white",
             }}
+            value={priceRange[0]}
+            onChange={handleMinChange}
           />
 
           <Typography>-</Typography>
@@ -160,6 +205,8 @@ const FilterSidebar = ({ allProducts,priceRange }) => {
               width: 80,
               backgroundColor: "white",
             }}
+            value={priceRange[1]}
+            onChange={handleMaxChange}
           />
         </Box>
 
@@ -168,12 +215,14 @@ const FilterSidebar = ({ allProducts,priceRange }) => {
           component="input"
           type="range"
           min="0"
-          max="500"
+          max="5000"
           step="100"
           sx={{
             width: "100%",
             cursor: "pointer",
           }}
+          value={priceRange[0]}
+          onChange={handleMinChange}
         />
 
         {/* Maximum Price Slider */}
@@ -187,6 +236,8 @@ const FilterSidebar = ({ allProducts,priceRange }) => {
             width: "100%",
             cursor: "pointer",
           }}
+          value={priceRange[1]}
+          onChange={handleMaxChange}
         />
       </Box>
 
@@ -203,6 +254,7 @@ const FilterSidebar = ({ allProducts,priceRange }) => {
             backgroundColor: "#be185d",
           },
         }}
+        onClick={resetFilters}
       >
         Reset Filter
       </Button>

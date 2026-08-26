@@ -65,8 +65,8 @@ export default function Navbar() {
           <Link to={"/"}>Home</Link>
           <Link to="/products">Products</Link>
           {User && <Link to={`/profile/${User._id}`}>Hello,{User.firstName}</Link>}
-          <Link>
-            <AddShoppingCartIcon />
+          <Link to='/cart'>
+            <AddShoppingCartIcon  />
           </Link>
           {User ? (
             <Button

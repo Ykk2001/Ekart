@@ -10,6 +10,7 @@ import VerifyEmail from "./pages/VerifyEmail";
 import Profile from "./pages/Profile";
 import Footer from "./component/Footer";
 import Products from "./pages/Products";
+import Cart from './pages/Cart'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,29 +29,48 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path:'/verify',
-    element:<Verify/>
+    path: "/verify",
+    element: <Verify />,
   },
   {
-    path:'/verify/:token',
-    element:<VerifyEmail/>
+    path: "/verify/:token",
+    element: <VerifyEmail />,
   },
   {
-    path:'/profile/:userId',
-    element:<><Navbar/><Profile/><Footer/></>
+    path: "/profile/:userId",
+    element: (
+      <>
+        <Navbar/>
+        <Profile/>
+        <Footer/>
+      </>
+    ),
   },
   {
-    path:'/products',
-    element:<><Navbar/><Products/></>
-  }
+    path: "/products",
+    element: (
+      <>
+        <Navbar />
+        <Products />
+      </>
+    ),
+  },
+  {
+    path: "/cart",
+    element: (
+      <>
+        <Navbar/>
+        <Cart/>
+      </>
+    ),
+  }    
 ]);
 
 export default function App() {
   return (
     <>
-      <ToastContainer position='top-right'/>
+      <ToastContainer position="top-right" />
       <RouterProvider router={router} />
-      
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
+import productSlice from './productSlice'
 import {persistReducer,persistStore,FLUSH,REHYDRATE,PAUSE,PERSIST,PURGE,REGISTER} from "redux-persist";
 // import storage from "redux-persist/lib/storage";  //by default storage=localstorage -->but this lib not working here 
 
@@ -22,6 +23,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: userReducer,
+  product:productSlice
 }); //we can place multiple reducer inside it eg user reducer,cartreducer
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);//2nd Main
