@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, Toolbar, Typography, Badge } from "@mui/material";
 import React from "react";
 import ShopingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -9,12 +9,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/userSlice";
 
 export default function Navbar() {
+  const { User } = useSelector((store) => store.user); //now store can access any component beacuse store Provided globally -->useSelecotr read the data from the Store
+  const { cart } = useSelector((store) => store.product); //store.product return the object of cart and product-->then we are destructuring and we got cart
+  console.log("user", User); //here User==userSlice reducer, user==user from store
   
-  const {User}  = useSelector((store) => store.user); //now store can access any component beacuse store Provided globally -->useSelecotr read the data from the Store
-  console.log("user",User)//here User==userSlice reducer, user==user from store
-  
-  const navigate=useNavigate();
-  const dispatch=useDispatch();
+  const admin=User?.role==='admin'?true:false;//checking the user is admin or not 
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const accessToken = localStorage.getItem("accessToken");
 
@@ -33,12 +35,11 @@ export default function Navbar() {
       if (res.data) {
         toast.success(res.data.message);
         dispatch(setUser(null));
-
-
+        navigate('/login')//if user  get logout then it should navigate to the login page
       }
     } catch (error) {
       toast.error(error.response.data.message);
-      console.log("Error while logout",error.response)
+      console.log("Error while logout", error.response);
     }
   }
 
@@ -48,7 +49,7 @@ export default function Navbar() {
         backgroundColor: "rgba(252, 228, 236)",
         display: "flex",
         justifyContent: "space-between",
-        minWidth:'100%'
+        minWidth: "100%",
       }}
     >
       <Box sx={{ color: "#de628f", fontWeight: 700 }}>
@@ -64,10 +65,18 @@ export default function Navbar() {
         >
           <Link to={"/"}>Home</Link>
           <Link to="/products">Products</Link>
-          {User && <Link to={`/profile/${User._id}`}>Hello,{User.firstName}</Link>}
-          <Link to='/cart'>
-            <AddShoppingCartIcon  />
+          {User && (
+            <Link to={`/profile/${User._id}`}>Hello,{User.firstName}</Link>
+          )}
+          {
+            admin && <Link to='/dashboard/sales'>Dashboard</Link>
+          }
+          <Link to="/cart">
+            <Badge badgeContent={cart?.items?.length||0 } color='error'>
+              <AddShoppingCartIcon />
+            </Badge>
           </Link>
+
           {User ? (
             <Button
               onClick={() => logoutHandler()}
@@ -75,9 +84,13 @@ export default function Navbar() {
               sx={{ backgroundColor: "#de628f" }}
             >
               Logout
-            </Button>   
+            </Button>
           ) : (
-            <Button onClick={()=>navigate('/login')} variant="contained" sx={{ backgroundColor: "purple" }}>
+            <Button
+              onClick={() => navigate("/login")}
+              variant="contained"
+              sx={{ backgroundColor: "purple" }}
+            >
               Login
             </Button>
           )}

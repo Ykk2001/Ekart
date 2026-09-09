@@ -11,6 +11,18 @@ import Profile from "./pages/Profile";
 import Footer from "./component/Footer";
 import Products from "./pages/Products";
 import Cart from './pages/Cart'
+import Dashboard from "./pages/Dashboard";
+
+//Below are the Child component of dashboard Component
+import AdminOrders from "./pages/admin/AdminOrders";
+import ShowUserOrders from "./pages/admin/ShowUserOrders";
+import AdminUsers from "./pages/admin/AdminUsers";
+import UserInfo from "./pages/admin/UserInfo";
+import AddProduct from "./pages/admin/AddProduct";
+import AdminProduct from "./pages/admin/AdminProduct";
+import AdminSales from "./pages/admin/AdminSales";
+import ProtectedRoute from "./component/ProtectedRoute";
+import SingleProduct from './pages/SingleProduct'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,13 +51,13 @@ const router = createBrowserRouter([
   {
     path: "/profile/:userId",
     element: (
-      <>
+      <ProtectedRoute>
         <Navbar/>
         <Profile/>
         <Footer/>
-      </>
+      </ProtectedRoute>
     ),
-  },
+  },//if user is looged in then it should show the Profile page other wise it should show the login page
   {
     path: "/products",
     element: (
@@ -54,16 +66,60 @@ const router = createBrowserRouter([
         <Products />
       </>
     ),
+  },//all products
+  {
+    path:'/products/:id',
+    element:(<>
+    <Navbar/>
+    <SingleProduct/>
+    </>)
   },
   {
     path: "/cart",
     element: (
-      <>
+      <ProtectedRoute> 
         <Navbar/>
         <Cart/>
-      </>
+      </ProtectedRoute>
     ),
-  }    
+  } ,//if user is looged in then it should show the Cart page other wise it should show the login page
+  {
+    path:"/dashboard",
+    element: <ProtectedRoute adminOnly={true}>
+      <Dashboard/>
+    </ProtectedRoute> ,
+    children:[
+      {
+        path:"sales",
+        element:<AdminSales/>
+      },
+      {
+        path:'add-product',
+        element:<AddProduct/>
+      },
+      {
+        path:'products',
+        element:<AdminProduct/>
+      },
+      {
+        path:'orders',
+        element:<AdminOrders/>
+      },
+      {
+       path:'users/orders/:userId',
+       element:<ShowUserOrders/>
+      },
+      {
+        path:'users',
+        element:<AdminUsers/>
+      },
+      {
+        path:'users/:id',
+        element:<UserInfo/>
+      }
+    ]
+  },//if user is admin then and then it will show the dashboard Page here also we have use Protected route
+  
 ]);
 
 export default function App() {
