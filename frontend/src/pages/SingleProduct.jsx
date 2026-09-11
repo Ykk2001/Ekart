@@ -40,7 +40,10 @@ export default function SingleProduct() {
         alignItems: "start",
     }}
       >
+        {/* product images */}
         <ProductImg images={product.productImg} />
+
+        {/* product Description */}
         <ProductDesc product={product} />
       </Box>
     </Container>
