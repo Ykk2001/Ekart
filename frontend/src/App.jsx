@@ -23,6 +23,10 @@ import AdminProduct from "./pages/admin/AdminProduct";
 import AdminSales from "./pages/admin/AdminSales";
 import ProtectedRoute from "./component/ProtectedRoute";
 import SingleProduct from './pages/SingleProduct'
+import AddressForm from "./pages/AddressForm";
+import OrderSuccess from "./pages/OrderSuccess";
+import MyOrder from "./pages/MyOrder";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -68,7 +72,7 @@ const router = createBrowserRouter([
     ),
   },//all products
   {
-    path:'/products/:id',
+    path:'/product/:id',
     element:(<>
     <Navbar/>
     <SingleProduct/>
@@ -83,6 +87,14 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   } ,//if user is looged in then it should show the Cart page other wise it should show the login page
+  {
+    path:'/address',
+    element:<ProtectedRoute><AddressForm/></ProtectedRoute>
+  },
+  {
+    path:"/order-success",
+    element:<ProtectedRoute><OrderSuccess/></ProtectedRoute>
+  },
   {
     path:"/dashboard",
     element: <ProtectedRoute adminOnly={true}>

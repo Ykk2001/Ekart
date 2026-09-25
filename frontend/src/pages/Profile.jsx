@@ -15,6 +15,8 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { setUser } from "@/redux/userSlice";
+import MyOrder from "./MyOrder";
+
 export default function Profile() {
   const { User } = useSelector((store) => store.user);
   console.log("from store ", User);
@@ -53,55 +55,57 @@ export default function Profile() {
     });
   }
 
- async function handleSubmit(e) {
-  e.preventDefault();
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-  const accessToken = localStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");
 
-  try {
-    const formData = new FormData();
+    try {
+      const formData = new FormData();
 
-    formData.append("firstName", updateUser.firstName || "");
-    formData.append("lastName", updateUser.lastName || "");
-    formData.append("phoneNo", updateUser.phoneNo || "");
-    formData.append("address", updateUser.address || "");
-    formData.append("city", updateUser.city || "");
-    formData.append("zipCode", updateUser.zipCode || "");
+      formData.append("firstName", updateUser.firstName || "");
+      formData.append("lastName", updateUser.lastName || "");
+      formData.append("phoneNo", updateUser.phoneNo || "");
+      formData.append("address", updateUser.address || "");
+      formData.append("city", updateUser.city || "");
+      formData.append("zipCode", updateUser.zipCode || "");
 
-    if (file) {
-      formData.append("file", file);
-    }
-
-    const res = await axios.put(
-      `http://localhost:5000/api/v1/user/update/${userId}`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+      if (file) {
+        formData.append("file", file);
       }
-    );
 
-    if (res.data.success) {
-      toast.success(res.data.message);
-      dispatch(setUser(res.data.user));
+      const res = await axios.put(
+        `http://localhost:5000/api/v1/user/update/${userId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      );
+
+      if (res.data.success) {
+        toast.success(res.data.message);
+        dispatch(setUser(res.data.user));
+      }
+    } catch (error) {
+      console.log("UPDATE ERROR:", error.response?.data || error);
+      toast.error(error.response?.data?.message || "Failed to update profile");
     }
-  } catch (error) {
-    console.log("UPDATE ERROR:", error.response?.data || error);
-    toast.error(error.response?.data?.message || "Failed to update profile");
   }
-}
 
   console.log("Update user ", updateUser);
 
   return (
     <Box
       sx={{
-        p: 4,
+        p: { xs: 2, sm: 3, md: 5 },
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
+        maxWidth: "1100px",
+        mx: "auto",
+        width: "100%",
       }}
     >
       <Tabs
@@ -109,43 +113,64 @@ export default function Profile() {
         value={tab}
         sx={{
           backgroundColor: "#f4f4f5",
-          borderRadius: 2,
-          mb: 3,
-          boxShadow: 3,
+          borderRadius: 3,
+          p: 0.5,
+          mb: 4,
+          boxShadow: "0 2px 10px rgba(0,0,0,0.04)",
+          "& .MuiTabs-indicator": { display: "none" },
         }}
       >
         <Tab
           label="Profile"
           sx={{
-            bgcolor: tab == 0 ? "white" : "transparent",
-            borderRadius: 3,
+            bgcolor: tab === 0 ? "#ffffff" : "transparent",
+            color: tab === 0 ? "text.primary" : "text.secondary",
+            borderRadius: 2.5,
             textTransform: "none",
+            fontWeight: 600,
+            px: 3,
+            boxShadow: tab === 0 ? "0 2px 8px rgba(0,0,0,0.06)" : "none",
+            transition: "all 0.2s ease",
           }}
         />
         <Tab
           label="Orders"
           sx={{
-            bgcolor: tab == 1 ? "white" : "transparent",
-            borderRadius: 3,
+            bgcolor: tab === 1 ? "#ffffff" : "transparent",
+            color: tab === 1 ? "text.primary" : "text.secondary",
+            borderRadius: 2.5,
             textTransform: "none",
+            fontWeight: 600,
+            px: 3,
+            boxShadow: tab === 1 ? "0 2px 8px rgba(0,0,0,0.06)" : "none",
+            transition: "all 0.2s ease",
           }}
         />
       </Tabs>
 
-      {tab == 0 && (
+      {tab === 0 && (
         <Box
           sx={{
             display: "flex",
             gap: 4,
-            alignItems: "center",
+            alignItems: "flex-start",
+            justifyContent: "center",
             flexDirection: { xs: "column", md: "row" },
+            width: "100%",
           }}
         >
-          {/* avtar */}
-          <Box sx={{ textAlign: "center", width: { xs: "100%", md: "auto" } }}>
+          {/* Avatar section */}
+          <Box sx={{ textAlign: "center", width: { xs: "100%", md: 240 } }}>
             <Avatar
               src={updateUser.profilePic}
-              sx={{ width: 120, height: 120, mx: "auto", mb: 2 }}
+              sx={{
+                width: 140,
+                height: 140,
+                mx: "auto",
+                mb: 2,
+                boxShadow: "0 4px 14px rgba(0,0,0,0.1)",
+                border: "3px solid #fff",
+              }}
             />
             <input
               type="file"
@@ -154,29 +179,34 @@ export default function Profile() {
               style={{ display: "none" }}
               onChange={handleFileChange}
             />
-
             <label htmlFor="upload-image">
               <Button
-                variant="contained"
+                variant="outlined"
                 component="span"
-                sx={{ textTransform: "none" }}
+                sx={{ textTransform: "none", borderRadius: 2, fontWeight: 600 }}
               >
                 Change Picture
               </Button>
             </label>
           </Box>
 
-          {/* form */}
-          <Card sx={{ width: { xs: "100%", sm: 400 }, boxShadow: 3 }}>
+          {/* Form Card */}
+          <Card
+            sx={{
+              flex: 1,
+              maxWidth: 600,
+              borderRadius: 4,
+              border: "1px solid",
+              borderColor: "grey.200",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.04)",
+            }}
+          >
             <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 2,
-                alignItems: "center",
-              }}
+              sx={{ p: 4, display: "flex", flexDirection: "column", gap: 2.5 }}
             >
-              <Typography variant="h6">Update Profile</Typography>
+              <Typography variant="h6" fontWeight={700}>
+                Personal Details
+              </Typography>
 
               <Box
                 sx={{
@@ -225,40 +255,54 @@ export default function Profile() {
                 onChange={handleChange}
               />
 
-              <TextField
-                label="City"
-                name="city"
-                fullWidth
-                value={updateUser?.city || ""}
-                onChange={handleChange}
-              />
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 2,
+                  flexDirection: { xs: "column", sm: "row" },
+                }}
+              >
+                <TextField
+                  label="City"
+                  name="city"
+                  fullWidth
+                  value={updateUser?.city || ""}
+                  onChange={handleChange}
+                />
+                <TextField
+                  label="Zip Code"
+                  name="zipCode"
+                  fullWidth
+                  value={updateUser?.zipCode || ""}
+                  onChange={handleChange}
+                />
+              </Box>
 
-              <TextField
-                label="Zip Code"
-                name="zipCode"
-                fullWidth
-                value={updateUser?.zipCode || ""}
-                onChange={handleChange}
-              />
-
-              <Button variant="contained" onClick={handleSubmit}>
-                Update Profile
+              <Button
+                variant="contained"
+                disableElevation
+                onClick={handleSubmit}
+                sx={{
+                  py: 1.3,
+                  borderRadius: 2.5,
+                  textTransform: "none",
+                  fontWeight: 600,
+                  fontSize: "0.95rem",
+                  mt: 1,
+                }}
+              >
+                Save Changes
               </Button>
-
             </CardContent>
           </Card>
         </Box>
       )}
 
-      {tab == 1 && (
-        <Card sx={{ width: { xs: "100%", sm: 400 } }}>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Orders
-            </Typography>
-            <Typography variant="body2">No orders found.</Typography>
-          </CardContent>
-        </Card>
+      {/* TAB 1: RENDER DIRECTLY WITHOUT 400px WRAPPER CARD */}
+      {tab === 1 && (
+        <Box sx={{ width: "100%", maxWidth: 960 }}>
+          <MyOrder />
+        </Box>
       )}
     </Box>
   );

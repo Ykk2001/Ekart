@@ -32,7 +32,7 @@ router.post("/change-password/:email", changePassword); //update the new passwor
 
 //fetch all user and update the particular user
 router.get("/all-user", isAuthenticated, isAdmin, alluser);
-router.get("/get-user/:userId", getUserById);
+router.get("/get-user/:userId", getUserById); 
 router.put("/update/:id", isAuthenticated, singleUpload, updateUser);
-export default router;
+export default router; 
 

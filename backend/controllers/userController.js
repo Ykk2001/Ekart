@@ -42,7 +42,7 @@ export async function register(req, res) {
       success: true,
       message: "User Registered Successfully",
       user: newUser,
-    });      
+    });
   } catch (error) {
     //try
     return res.status(500).json({ success: false, message: error.message });
@@ -178,14 +178,14 @@ export async function login(req, res) {
     );
 
     existingUser.isLoggedIn = true; //logged In
-    await existingUser.save();   
+    await existingUser.save();
 
     //check for existing session and delete it from Session Model
     const existingSession = await Session.findOne({ userId: existingUser._id }); //finding the existing session
     if (existingSession) {
       await Session.deleteOne({ userId: existingUser._id }); //deleting existing session
-    }  
-   
+    }
+
     //create new Session
     await Session.create({ userId: existingUser._id }); //creationg the session doc in session Model in Db
 
@@ -228,13 +228,13 @@ export async function forgetPassword(req, res) {
         .json({ success: false, message: "User not found" });
     }
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);//for 10  min
+    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); //for 10  min
 
     //changing inside the dtabase
     user.otp = otp;
     user.otpExpiry = otpExpiry;
     await user.save();
-    await sendOTPMail(otp, email); 
+    await sendOTPMail(otp, email);
 
     return res
       .status(200)
@@ -342,17 +342,27 @@ export async function alluser(req, res) {
 export async function getUserById(req, res) {
   try {
     const { userId } = req.params;
+
     const user = await User.findById(userId).select(
-      -otp - otpExpiry - token - password,
+      "-otp -otpExpiry -token -password",
     );
+
     if (!user) {
-      return res
-        .status(400)
-        .json({ success: false, message: "User not found" });
+      return res.status(400).json({
+        success: false,
+        message: "User not found",
+      });
     }
-    return res.status(200).json({ success: true, user: user });
+
+    return res.status(200).json({
+      success: true,
+      user,
+    });
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 }
 
@@ -361,14 +371,7 @@ export async function updateUser(req, res) {
     const userIdToUpdate = req.params.id;
     const loggedInUser = req.user;
 
-    const {
-      firstName,
-      lastName,
-      address,
-      city,
-      zipCode,
-      phoneNo,
-    } = req.body;
+    const { firstName, lastName, address, city, zipCode, phoneNo } = req.body;
 
     // Authorization check
     if (
@@ -414,7 +417,7 @@ export async function updateUser(req, res) {
             } else {
               resolve(result);
             }
-          }
+          },
         );
 
         stream.end(req.file.buffer);

@@ -4,6 +4,7 @@ import express from 'express';
 import userRoute from './routes/userRoutes.js';
 import productRoute from './routes/productRoute.js'
 import cartRoute from './routes/cartRoute.js'
+import orderRoute from './routes/orderRoute.js'
 
 import  {connectDB } from './database/db.js';
 import cors from 'cors'
@@ -24,6 +25,7 @@ app.get('/',(req,res)=>{
 app.use('/api/v1/user',userRoute);//base api url for the userController
 app.use('/api/v1/product',productRoute)//base api url for the ProductController
 app.use('/api/v1/cart',cartRoute)
+app.use('/api/v1/orders',orderRoute)
 
  connectDB();  
 
@@ -32,11 +34,12 @@ app.listen(PORT,()=>{
   console.log(`server is listening on port: ${PORT}`);
 })    // when server will get run port will get registered
 
-//NOTES-----> 3rd Vedio is going on -->completed till 2:15:00 sidebar component is going on                                                                                                                                                                                                                                                                                           
+//NOTES-----> 4rd Vedio is going on -->completed till 3:32 myorder is completed --next order showing in admin dashboard                                                                                                                                                                                                                                                                                       
 
 //Flow of the project in backend-->1) server creation through express --->2)mongodb connected through mongoose--->3)
 
 //password for ykhatake6@gmail.com -->Yogesh@456 
+
 
 
 

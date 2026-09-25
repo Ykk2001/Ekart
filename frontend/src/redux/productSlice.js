@@ -4,19 +4,42 @@ const productSlice=createSlice({
     name:'product',
     initialState:{
         products:[],
-        cart:[]
+        cart:[],
+        addresses:[],
+        selectedAddress:null//current chosen address
     },
     reducers:{
-        //actions
+        //actions 
         setProducts:(state,action)=>{
             state.products=action.payload;
         },
         setCart:(state,action)=>{
             state.cart=action.payload;
+        },
+        //adress managment
+        addAddress:(state,action)=>{
+            if(!state.addresses)
+            {
+                state.addresses=[]
+            }
+            state.addresses.push(action.payload);
+        },
+        setSelectedAddress:(state,action)=>{
+            state.selectedAddress=action.payload
+        },
+        deleteAddress:(state,action)=>{
+            state.addresses=state.addresses.filter((add,index)=>index!==action.payload);//filter return the updated array 
+
+            //Reset selectedAddress if it was deleted
+            if(state.selectedAddress===action.payload)
+            {
+             state.selectedAddress=null;
+            }
         }
+
     }
 })
 
-export const {setProducts,setCart}=productSlice.actions;
+export const {setProducts,setCart,addAddress,setSelectedAddress,deleteAddress}=productSlice.actions;
 
 export default productSlice.reducer;

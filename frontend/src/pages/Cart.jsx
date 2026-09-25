@@ -232,6 +232,7 @@ const Cart = () => {
                   variant="contained"
                   fullWidth
                   className="place-order-button"
+                  onClick={()=>navigate('/address')}
                 >
                   Place Order
                 </Button>

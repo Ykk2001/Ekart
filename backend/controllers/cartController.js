@@ -14,6 +14,8 @@ export async function getCart(req, res) {
   }
 } //get Cart  -->whenever request coming for getCart then -->from middleware we are getting the userId -->from that id we are finfing the cart from the cart model
 
+
+
 export async function addCart(req, res) {
   try {
     const userId = req.id;
@@ -76,6 +78,7 @@ export async function addCart(req, res) {
   }
 } //add Cart
 
+
 export async function updateQuantity(req, res) {
   try {
     const userId = req.id;
@@ -119,6 +122,7 @@ export async function updateQuantity(req, res) {
   }
 } //here we are updating the cart of particular user -->by userId we find the cart -->by productId we find the product from the cart-->then by type we have increased the quantity or decreased the quant
 
+
 export async function removeCart(req, res) {
   try {
     const userId = req.id;
@@ -147,4 +151,9 @@ export async function removeCart(req, res) {
   }
 } //here i am getting the useId from the req and also getting the productId from the req.body --->from the userId i will find the cart-->and from the Productid i will removve the particular product from the cart -->after updating the cart again i will calculate the totalprice of the cart-->in that way cart will get updated -->then will send the response as a cart to the client
 
-//Understaand the Populate later (IMP)
+
+
+    
+
+
+

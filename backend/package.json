@@ -10,7 +10,8 @@
     "mongoose": "^9.4.1",
     "multer": "^2.1.1",
     "nodemailer": "^8.0.5",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "razorpay": "^2.9.8"
   },
   "name": "ekart-backend",
   "version": "1.0.0",
