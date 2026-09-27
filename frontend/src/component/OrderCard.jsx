@@ -448,7 +448,7 @@ export default function OrderCard({ userOrder = [], loading = false }) {
                           }}
                           onClick={() =>
                             product?.productId?._id &&
-                            navigate(`/product/${product.productId._id}`)
+                            navigate(`/products/${product.productId._id}`)
                           }
                         />
 
