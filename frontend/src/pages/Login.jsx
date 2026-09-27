@@ -38,7 +38,7 @@ export default function Login() {
  async function handleSubmit()
   { 
     try{
-     let res=await axios.post(`http://localhost:5000/api/v1/user/login`,formData,{
+     let res=await axios.post(`${import.meta.env.VITE_URL}/api/v1/user/login`,formData,{
       headers:{
         "Content-Type":'Application/json'
       }

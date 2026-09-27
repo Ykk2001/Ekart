@@ -39,7 +39,7 @@ export default function Signup() {
     try {
        setLoading(true);
       const res = await axios.post(
-        `http://localhost:5000/api/v1/user/register`,
+        `${import.meta.env.VITE_URL}/api/v1/user/register`,
         formData,
         { headers:{
           "Content-Type":'application/json'

@@ -70,7 +70,7 @@ export default function AddProduct() {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5000/api/v1/product/add",
+        `${import.meta.env.VITE_URL}/api/v1/product/add`,
         formData,
         {
           headers: {

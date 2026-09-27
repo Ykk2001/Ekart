@@ -14,7 +14,7 @@ export default function VerifyEmail() {
   async function verifyEmail() {
     try {
       let res = await axios.post(
-        `http://localhost:5000/api/v1/user/verify`,
+        `${import.meta.env.VITE_URL}/api/v1/user/verify`,
         {},
         {
           headers: {
