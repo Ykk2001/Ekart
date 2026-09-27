@@ -13,8 +13,13 @@ const app=express();
 
 const PORT=process.env.PORT ||5000 //process.env is global object in node js  it stores environment variables
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://ekartyoge.netlify.app",
+];
+
 //middleware
-app.use(cors({origin:"http://localhost:5173",credentials:true}))//This allows all origins. from frontend and from any device
+app.use(cors({origin:allowedOrigins,credentials:true}))//This allows all origins. from frontend and from any device
 app.use(express.json());//in app.use() middleware will get mounted express.json() parses the json into real object
 
 //Routes
