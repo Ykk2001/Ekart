@@ -1,3 +1,4 @@
+
 import { setProducts } from "@/redux/productSlice";
 import {
   Box,
@@ -118,13 +119,14 @@ export default function AddProduct() {
       >
 
         {/* Page Heading */}
-        <Box sx={{ mb: 2 }}>
+        <Box sx={{ mb: 3 }}>
           <Typography
-            variant="h5"
+            variant="h4"
             sx={{
               fontWeight: 700,
-              color: "#1e293b",
-              fontSize: { xs: "1.4rem", md: "1.6rem" },
+              color: "#0f172a",
+              fontSize: { xs: "1.75rem", md: "2.1rem" },
+              letterSpacing: "-0.02em",
             }}
           >
             Add Product
@@ -133,8 +135,8 @@ export default function AddProduct() {
           <Typography
             sx={{
               color: "#64748b",
-              fontSize: "0.95rem",
-              mt: 0.3,
+              fontSize: "1.05rem",
+              mt: 0.5,
             }}
           >
             Add a new product to your store
@@ -147,23 +149,25 @@ export default function AddProduct() {
           sx={{
             width: "100%",
             border: "1px solid #e2e8f0",
-            borderRadius: 2.5,
+            borderRadius: 3,
             backgroundColor: "#ffffff",
+            boxShadow: "0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03)",
           }}
         >
 
           {/* Header */}
           <CardHeader
             sx={{
-              px: { xs: 2.5, md: 3 },
-              py: 2,
+              px: { xs: 3, md: 4 },
+              py: 2.8,
             }}
             title={
               <Typography
                 sx={{
-                  fontSize: "1.15rem",
+                  fontSize: "1.3rem",
                   fontWeight: 600,
-                  color: "#1e293b",
+                  color: "#0f172a",
+                  letterSpacing: "-0.01em",
                 }}
               >
                 Product Information
@@ -172,9 +176,9 @@ export default function AddProduct() {
             subheader={
               <Typography
                 sx={{
-                  fontSize: "0.9rem",
+                  fontSize: "1rem",
                   color: "#64748b",
-                  mt: 0.2,
+                  mt: 0.3,
                 }}
               >
                 Enter the details of your product
@@ -187,8 +191,8 @@ export default function AddProduct() {
           {/* Form Content */}
           <CardContent
             sx={{
-              px: { xs: 2.5, md: 3 },
-              py: 2.5,
+              px: { xs: 3, md: 4 },
+              py: 3.5,
             }}
           >
             <Box
@@ -197,21 +201,21 @@ export default function AddProduct() {
             >
 
               {/* ================= BASIC INFORMATION ================= */}
-              <Box sx={{ mb: 2.5 }}>
+              <Box sx={{ mb: 3.5 }}>
 
                 <Typography
                   sx={{
-                    fontSize: "1rem",
+                    fontSize: "1.15rem",
                     fontWeight: 600,
-                    color: "#334155",
-                    mb: 1.5,
+                    color: "#1e293b",
+                    mb: 2,
                   }}
                 >
                   Basic Information
                 </Typography>
 
                 {/* Product Name */}
-                <Box sx={{ mb: 1.7 }}>
+                <Box sx={{ mb: 2.2 }}>
                   <Typography
                     component="label"
                     sx={labelStyle}
@@ -227,13 +231,12 @@ export default function AddProduct() {
                     placeholder="Enter product name"
                     required
                     fullWidth
-                    size="small"
                     sx={inputStyle}
                   />
                 </Box>
 
                 {/* Price */}
-                <Box sx={{ mb: 1.7 }}>
+                <Box sx={{ mb: 2.2 }}>
                   <Typography
                     component="label"
                     sx={labelStyle}
@@ -249,14 +252,14 @@ export default function AddProduct() {
                     placeholder="Enter product price"
                     required
                     fullWidth
-                    size="small"
                     InputProps={{
                       startAdornment: (
                         <Typography
                           sx={{
-                            fontSize: "0.95rem",
+                            fontSize: "1.05rem",
+                            fontWeight: 500,
                             color: "#64748b",
-                            mr: 0.7,
+                            mr: 0.8,
                           }}
                         >
                           ₹
@@ -268,7 +271,7 @@ export default function AddProduct() {
                 </Box>
 
                 {/* Brand + Category */}
-                <Grid container spacing={2}>
+                <Grid container spacing={2.5}>
 
                   {/* Brand */}
                   <Grid size={{ xs: 12, md: 6 }}>
@@ -287,7 +290,6 @@ export default function AddProduct() {
                       placeholder="e.g. Lenovo"
                       required
                       fullWidth
-                      size="small"
                       sx={inputStyle}
                     />
                   </Grid>
@@ -309,7 +311,6 @@ export default function AddProduct() {
                       placeholder="e.g. Laptop"
                       required
                       fullWidth
-                      size="small"
                       sx={inputStyle}
                     />
                   </Grid>
@@ -317,17 +318,17 @@ export default function AddProduct() {
                 </Grid>
               </Box>
 
-              <Divider sx={{ mb: 2.5 }} />
+              <Divider sx={{ mb: 3.5 }} />
 
               {/* ================= DESCRIPTION ================= */}
-              <Box sx={{ mb: 2.5 }}>
+              <Box sx={{ mb: 3.5 }}>
 
                 <Typography
                   sx={{
-                    fontSize: "1rem",
+                    fontSize: "1.15rem",
                     fontWeight: 600,
-                    color: "#334155",
-                    mb: 1.5,
+                    color: "#1e293b",
+                    mb: 2,
                   }}
                 >
                   Product Description
@@ -346,24 +347,24 @@ export default function AddProduct() {
                   onChange={handleChange}
                   placeholder="Write a short description about your product..."
                   multiline
-                  rows={3}
+                  rows={4}
                   fullWidth
                   sx={inputStyle}
                 />
 
               </Box>
 
-              <Divider sx={{ mb: 2.5 }} />
+              <Divider sx={{ mb: 3.5 }} />
 
               {/* ================= IMAGES ================= */}
               <Box sx={{ mb: 1 }}>
 
                 <Typography
                   sx={{
-                    fontSize: "1rem",
+                    fontSize: "1.15rem",
                     fontWeight: 600,
-                    color: "#334155",
-                    mb: 1.5,
+                    color: "#1e293b",
+                    mb: 2,
                   }}
                 >
                   Product Images
@@ -373,8 +374,8 @@ export default function AddProduct() {
                   elevation={0}
                   sx={{
                     border: "1px dashed #cbd5e1",
-                    borderRadius: 1.5,
-                    p: 1.5,
+                    borderRadius: 2,
+                    p: 2.5,
                     backgroundColor: "#f8fafc",
                   }}
                 >
@@ -390,10 +391,10 @@ export default function AddProduct() {
               <CardActions
                 sx={{
                   px: 0,
-                  pt: 2,
+                  pt: 3,
                   pb: 0,
                   justifyContent: "flex-end",
-                  gap: 1.2,
+                  gap: 1.5,
                 }}
               >
 
@@ -413,11 +414,11 @@ export default function AddProduct() {
                     })
                   }
                   sx={{
-                    minWidth: 90,
-                    height: 38,
-                    borderRadius: 1.3,
+                    minWidth: 105,
+                    height: 44,
+                    borderRadius: 1.5,
                     textTransform: "none",
-                    fontSize: "0.9rem",
+                    fontSize: "1rem",
                     fontWeight: 600,
                     color: "#475569",
                     borderColor: "#cbd5e1",
@@ -437,11 +438,11 @@ export default function AddProduct() {
                   type="submit"
                   variant="contained"
                   sx={{
-                    minWidth: 130,
-                    height: 38,
-                    borderRadius: 1.3,
+                    minWidth: 150,
+                    height: 44,
+                    borderRadius: 1.5,
                     textTransform: "none",
-                    fontSize: "0.9rem",
+                    fontSize: "1rem",
                     fontWeight: 600,
                     backgroundColor: "#db2777",
                     boxShadow: "none",
@@ -461,7 +462,7 @@ export default function AddProduct() {
                       }}
                     >
                       <CircularProgress
-                        size={17}
+                        size={18}
                         sx={{ color: "white" }}
                       />
 
@@ -487,10 +488,10 @@ export default function AddProduct() {
 
 const labelStyle = {
   display: "block",
-  fontSize: "0.95rem",
-  fontWeight: 500,
+  fontSize: "1.02rem",
+  fontWeight: 600,
   color: "#334155",
-  mb: 0.6,
+  mb: 0.8,
 };
 
 
@@ -498,8 +499,8 @@ const labelStyle = {
 
 const inputStyle = {
   "& .MuiOutlinedInput-root": {
-    minHeight: 40,
-    borderRadius: 1.3,
+    minHeight: 46,
+    borderRadius: 1.5,
     backgroundColor: "#ffffff",
 
     "& fieldset": {
@@ -512,19 +513,19 @@ const inputStyle = {
 
     "&.Mui-focused fieldset": {
       borderColor: "#db2777",
-      borderWidth: 1,
+      borderWidth: "1.5px",
     },
   },
 
   "& .MuiInputBase-input": {
-    fontSize: "0.95rem",
-    color: "#334155",
+    fontSize: "1.05rem",
+    color: "#1e293b",
+    py: 1.4,
   },
 
   "& .MuiInputBase-input::placeholder": {
     color: "#94a3b8",
     opacity: 1,
-    fontSize: "0.9rem",
+    fontSize: "1rem",
   },
 };
-

@@ -3,9 +3,11 @@ import React from "react";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ShieldIcon from "@mui/icons-material/Shield";
 import HeadsetIcon from "@mui/icons-material/Headset";
+
+
 export default function Features() {
   return (
-    <Box sx={{ display: "flex", justifyContent: "space-between", p: 4, background:'#e1e2e4' }}>
+    <Box sx={{ display: "flex", justifyContent: "space-between", p: 15, background:'#e1e2e4' }}>
      
       <Box
         sx={{
@@ -98,3 +100,6 @@ export default function Features() {
     </Box>
   );
 }
+
+
+

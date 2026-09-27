@@ -17,7 +17,7 @@ import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
 
 export default function AdminUsers() {
   const [users, setUsers] = useState([]);
@@ -273,7 +273,7 @@ export default function AdminUsers() {
                         fontWeight: 600,
                       }}
                     >
-                      Orders
+                     Show Orders
                     </Button>
                   </Stack>
                 </CardContent>

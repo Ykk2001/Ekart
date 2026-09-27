@@ -72,7 +72,7 @@ const router = createBrowserRouter([
     ),
   },//all products
   {
-    path:'/product/:id',
+    path:'/products/:id',
     element:(<>
     <Navbar/>
     <SingleProduct/>
@@ -94,6 +94,10 @@ const router = createBrowserRouter([
   {
     path:"/order-success",
     element:<ProtectedRoute><OrderSuccess/></ProtectedRoute>
+  },
+  {
+    path:'/myorder',
+    element:<ProtectedRoute><MyOrder/></ProtectedRoute>
   },
   {
     path:"/dashboard",
